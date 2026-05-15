@@ -1,0 +1,21 @@
+# IntelliJ
+.idea/
+*.iml
+
+# Maven build output
+target/
+**/target/
+
+# Database data (local Docker volume)
+**/db-data/
+
+# Node (for later, frontend)
+**/node_modules/
+**/dist/
+
+# OS junk
+.DS_Store
+**/.DS_Store
+
+# Logs
+*.log
