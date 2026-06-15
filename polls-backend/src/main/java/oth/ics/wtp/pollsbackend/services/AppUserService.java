@@ -60,4 +60,10 @@ public class AppUserService implements UserDetailsService {
         return toDto(user);
     }
 
+    public AppUser getEntityByUsername(String username) {
+        return appUserRepository.findByUsername(username)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "User not found: " + username));
+    }
+
 }
