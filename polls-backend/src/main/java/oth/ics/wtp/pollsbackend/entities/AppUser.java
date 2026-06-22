@@ -41,4 +41,19 @@ public class AppUser {
     public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
     }
+
+    //localhost:8080/swagger-ui/index.html
+    //http://localhost:7070/?server=db
+    /*
+    {
+      "title": "Team lunch",
+      "description": "Help plan lunch",
+      "dueDate": "2026-07-01",
+      "questions": [
+        { "text": "What did you think?", "type": "PLAIN_TEXT" },
+        { "text": "Would you return?", "type": "BOOLEAN" },
+        { "text": "Rate the food", "type": "NUMERIC" }
+      ]
+    }
+     */
 }
