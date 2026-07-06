@@ -1,0 +1,255 @@
+:root {
+    --bs-purple: #6f42c1;
+}
+
+.bg-purple {
+    background-color: #6f42c1 !important;
+}
+
+.btn-purple {
+    background-color: #6f42c1 !important;
+    border-color: #6f42c1 !important;
+    color: white !important;
+}
+
+.btn-purple:hover {
+    background-color: #5a32a3 !important;
+    border-color: #5a32a3 !important;
+}
+
+.btn-outline-purple {
+    border-color: #6f42c1 !important;
+    color: #6f42c1 !important;
+}
+
+.btn-outline-purple:hover {
+    background-color: #6f42c1 !important;
+    color: white !important;
+}
+
+/* ── Responsive breakpoints ── */
+
+/* Mobile: max 576px */
+@media (max-width: 576px) {
+    .navbar .d-flex {
+        flex-wrap: wrap;
+        gap: 4px !important;
+    }
+
+    .navbar .btn {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+
+    .card-body {
+        padding: 1rem !important;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Small tablets: 577px - 768px */
+@media (min-width: 577px) and (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .card {
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+}
+
+/* Tablets: 769px - 992px */
+@media (min-width: 769px) and (max-width: 992px) {
+    .container {
+        max-width: 90%;
+    }
+
+    .col-md-8 {
+        width: 90%;
+    }
+}
+
+/* Desktop: 993px - 1200px */
+@media (min-width: 993px) and (max-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+/* Large desktop: 1201px+ */
+@media (min-width: 1201px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+/* Print styles (N-U requires print function) */
+@media print {
+    .navbar {
+        display: none !important;
+    }
+
+    .btn {
+        display: none !important;
+    }
+
+    .card {
+        border: 1px solid #000 !important;
+        break-inside: avoid;
+    }
+
+    body {
+        font-size: 12pt;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a2e;
+        color: #e0e0e0;
+    }
+
+    .navbar.bg-purple {
+        background-color: #4a2080 !important;
+    }
+
+    .card {
+        background-color: #2d2d44;
+        color: #e0e0e0;
+        border-color: #444466;
+    }
+
+    .card-header {
+        background-color: #3d3d5c !important;
+        color: #e0e0e0;
+    }
+
+    .bg-light {
+        background-color: #3d3d5c !important;
+        color: #e0e0e0;
+    }
+
+    .form-control, .form-select {
+        background-color: #2d2d44;
+        color: #e0e0e0;
+        border-color: #555577;
+    }
+
+    .form-control:focus, .form-select:focus {
+        background-color: #3d3d5c;
+        color: #e0e0e0;
+        border-color: #6f42c1;
+        box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+    }
+
+    .form-control::placeholder {
+        color: #999;
+    }
+
+    .text-muted {
+        color: #aaaacc !important;
+    }
+
+    .alert-info {
+        background-color: #1a3a5c;
+        color: #90caf9;
+        border-color: #1e4976;
+    }
+
+    .alert-danger {
+        background-color: #4a1a1a;
+        color: #f48a8a;
+        border-color: #6b2020;
+    }
+
+    .alert-success {
+        background-color: #1a3a1a;
+        color: #90ee90;
+        border-color: #1e4a1e;
+    }
+
+    .nav-tabs {
+        border-color: #444466;
+    }
+
+    .nav-link {
+        color: #aaaacc;
+    }
+
+    .nav-link.active {
+        background-color: #2d2d44;
+        color: #e0e0e0;
+        border-color: #444466 #444466 #2d2d44;
+    }
+
+    .nav-link:hover {
+        color: #e0e0e0;
+    }
+
+    .badge.bg-secondary {
+        background-color: #555577 !important;
+    }
+
+    .btn-outline-secondary {
+        color: #aaaacc;
+        border-color: #555577;
+    }
+
+    .btn-outline-secondary:hover {
+        background-color: #3d3d5c;
+        color: #e0e0e0;
+    }
+
+    .btn-outline-danger {
+        color: #f48a8a;
+        border-color: #f48a8a;
+    }
+
+    .shadow, .shadow-sm {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.4) !important;
+    }
+
+    .text-purple {
+        color: #b39ddb !important;
+    }
+}
+
+/* Landscape phone */
+@media (max-width: 768px) and (orientation: landscape) {
+    .container.mt-5 {
+        margin-top: 1rem !important;
+    }
+
+    .card-body.p-4 {
+        padding: 1rem !important;
+    }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .card {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12) !important;
+    }
+}

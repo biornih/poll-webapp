@@ -2,6 +2,7 @@ package oth.ics.wtp.pollsbackend.entities;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,7 +27,7 @@ public class Poll {
     private AppUser creator;
 
     @OneToMany(mappedBy = "poll", fetch = FetchType.EAGER)
-    private List<Question> questions;
+    private List<Question> questions = new ArrayList<>();
 
     public Poll() {}
 

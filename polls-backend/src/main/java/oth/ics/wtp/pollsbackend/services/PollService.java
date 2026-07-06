@@ -27,7 +27,7 @@ public class PollService {
         this.questionRepository = questionRepository;
         this.appUserService = appUserService;
     }
-
+    @Transactional
     public PollDto create(CreatePollDto createDto, String username) {
         if (pollRepository.existsByTitle(createDto.title())) {
             throw new ResponseStatusException(
@@ -47,14 +47,14 @@ public class PollService {
         }
         return toDto(pollRepository.findById(saved.getId()).orElseThrow());
     }
-
+    @Transactional
     public List<PollDto> listByCreator(String username) {
         return pollRepository.findByCreatorUsername(username)
                 .stream()
                 .map(this::toDto)
                 .toList();
     }
-
+    @Transactional
     public PollDto get(long id, String username) {
         Poll poll = findPollOrThrow(id);
         if (!poll.getCreator().getUsername().equals(username)) {
