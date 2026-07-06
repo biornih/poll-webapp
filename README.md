@@ -1,33 +1,75 @@
 # ics-wtp-polls
 
-Poll management web application for the Web Technology Project (International Computer Science), Summer semester 2026.
+**Poll Management Application** — Web Technology Project (International Computer Science), OTH Regensburg, Summer Semester 2026.
 
 ## Description
 
-A web application that allows users to create polls with multiple question types, invite other users to participate, and view aggregate results.
+A full-stack web application that allows users to create polls with multiple question types, invite other users to participate, and view aggregate results.
+
+### Core features
+- User registration and login (HTTP Basic Auth)
+- Create polls with plain-text, boolean, and numeric questions
+- Invite up to 3 users per poll
+- Participate in polls by answering all questions
+- View individual and aggregate results after finishing a poll
+- Dark mode support, responsive layout
 
 ## Architecture
 
-- **Backend:** Spring Boot 4, Java 25, MariaDB
-- **Frontend:** React with Vite, Bootstrap (to be added)
-- **Deployment:** Docker Compose (to be added)
+### Backend
+- **Framework:** Spring Boot 4, Java 25
+- **Database:** MariaDB (via Docker), JPA/Hibernate for ORM
+- **Security:** Spring Security with HTTP Basic Auth, BCrypt password hashing
+- **API:** REST API documented with OpenAPI/Swagger (SpringDoc)
+- **Testing:** JUnit integration tests with H2 in-memory database, 86% line coverage
 
-## Running the development environment
+### Frontend
+- **Framework:** React 19 with Vite
+- **Routing:** React Router
+- **Styling:** Bootstrap 5, custom CSS with dark mode and responsive media queries
 
-### 1. Start the database
+### Deployment
+- All services containerized with Docker
+- `docker-compose.yml` at project root starts all three containers (db, backend, frontend) with one command
 
-\`\`\`bash
+## Running the application
+
+### Production (Docker)
+
+```bash
+# Build the backend jar first
+cd polls-backend
+./mvnw package -DskipTests
+
+# Start all containers
+cd ..
+docker compose up -d --build
+```
+
+- Frontend: http://localhost
+- Backend API: http://localhost:8080
+- Swagger UI: http://localhost:8080/swagger-ui/index.html
+
+### Development
+
+```bash
+# Start the database
 cd polls-backend/db
 docker compose up -d
-\`\`\`
 
-The MariaDB instance runs on port 3306. Adminer (DB admin UI) runs on port 7070.
-
-### 2. Run the backend
-
-Open the project in IntelliJ and run \`PollsBackendApplication\`. The backend runs on http://localhost:8080. Swagger UI is available at http://localhost:8080/swagger-ui/index.html.
+# Run backend in IntelliJ (PollsBackendApplication)
+# Run frontend
+cd polls-frontend
+npm run dev
+# Frontend available at http://localhost:5173
+```
 
 ## AI usage
 
-This project uses Claude (Anthropic) as a learning assistant during development. All conversations and prompts are documented. Generated code does not exceed 25% of the total codebase.
+This project was developed with **Claude (Anthropic)** as a learning assistant. Claude was used to:
+- Explain Spring Boot concepts (dependency injection, JPA, Spring Security)
+- Guide the step-by-step implementation of each layer
+- Debug errors during development
+- Explain React concepts and hooks
 
+All conversations were used for learning and understanding. Every line of code was typed manually and can be explained. AI-generated code does not exceed 25% of the total codebase.
