@@ -98,8 +98,7 @@ function PollsPage() {
                                     <h5 className="card-title">{poll.title}</h5>
                                     <p className="card-text text-muted">{poll.description}</p>
                                     <small className="text-muted">
-                                        Due: {poll.dueDate} &nbsp;|&nbsp;
-                                        {poll.questions.length} questions &nbsp;|&nbsp;
+                                        Due: {new Date(poll.dueDate).toLocaleDateString('de-DE')}                                        {poll.questions.length} questions &nbsp;|&nbsp;
                                         <span className={poll.finished
                                             ? 'text-danger' : 'text-success'}>
                       {poll.finished ? 'Finished' : 'Active'}

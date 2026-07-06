@@ -37,7 +37,7 @@ function PendingPollsPage() {
                     </div>
                 )}
                 {invitations
-                    .sort((a, b) => new Date(b.poll.dueDate) - new Date(a.poll.dueDate))
+                    .sort((a, b) => a.poll.dueDate.localeCompare(b.poll.dueDate))
                     .map(inv => (
                         <div key={inv.id} className="card mb-3 shadow-sm">
                             <div className="card-body">
@@ -48,8 +48,7 @@ function PendingPollsPage() {
                                             {inv.poll.description}
                                         </p>
                                         <small className="text-muted">
-                                            Due: {inv.poll.dueDate} &nbsp;|&nbsp;
-                                            {inv.poll.questions.length} questions &nbsp;|&nbsp;
+                                            Due: {new Date(inv.poll.dueDate).toLocaleDateString('de-DE')}                                            {inv.poll.questions.length} questions &nbsp;|&nbsp;
                                             Created by: {inv.poll.creator.username}
                                         </small>
                                     </div>
