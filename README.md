@@ -14,7 +14,15 @@ A full-stack web application that allows users to create polls with multiple que
 - View individual and aggregate results after finishing a poll
 - Dark mode support, responsive layout
 
-## Architecture
+### Extra Features
+
+- **Expired polls** — polls past their due date show as "Expired" and block new answers
+- **Profile page** — user statistics (polls created, pending, answered) with clickable navigation
+- **Profile editing** — username can be changed anytime; password change limited to once per week
+- **Uninvite with undo** — poll creators can uninvite users within 10 seconds of inviting them
+- **Dark mode** — full dark theme following system preference (macOS/Windows appearance setting)
+- **Animated UI** — moving gradient background, button wave shimmer, radar pulse on pending indicator
+- **Printing** — printing all your polls by clicking on "Print"
 
 ### Backend
 - **Framework:** Spring Boot 4, Java 25
