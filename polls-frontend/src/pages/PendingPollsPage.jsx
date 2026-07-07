@@ -48,16 +48,24 @@ function PendingPollsPage() {
                                             {inv.poll.description}
                                         </p>
                                         <small className="text-muted">
-                                            Due: {new Date(inv.poll.dueDate).toLocaleDateString('de-DE')}                                            {inv.poll.questions.length} questions &nbsp;|&nbsp;
+                                            Due: {new Date(inv.poll.dueDate).toLocaleDateString('de-DE')} &nbsp;|&nbsp;
+                                            {inv.poll.questions.length} questions &nbsp;|&nbsp;
                                             Created by: {inv.poll.creator.username}
+                                            {new Date(inv.poll.dueDate) < new Date() && (
+                                                <span className="badge bg-warning ms-2">Expired</span>
+                                            )}
                                         </small>
                                     </div>
-                                    <Link
-                                        to={`/polls/${inv.poll.id}/participate`}
-                                        className="btn btn-purple"
-                                    >
-                                        Answer
-                                    </Link>
+                                    {new Date(inv.poll.dueDate) < new Date() ? (
+                                        <span className="badge bg-warning">Expired</span>
+                                    ) : (
+                                        <Link
+                                            to={`/polls/${inv.poll.id}/participate`}
+                                            className="btn btn-purple"
+                                        >
+                                            Answer
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
                         </div>

@@ -11,6 +11,8 @@ function PollsPage() {
     const [inviteError, setInviteError] = useState(null)
     const [inviteSuccess, setInviteSuccess] = useState(null)
     const navigate = useNavigate()
+    const [recentInvites, setRecentInvites] = useState({})
+    const [lastInvitedUsername, setLastInvitedUsername] = useState('')
 
     useEffect(() => {
         if (!api.isLoggedIn()) {
@@ -18,6 +20,23 @@ function PollsPage() {
             return
         }
         loadPolls()
+    }, [])
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setRecentInvites(prev => {
+                const updated = {}
+                let hasAny = false
+                for (const key in prev) {
+                    if (prev[key] > 0) {
+                        updated[key] = prev[key] - 1
+                        hasAny = true
+                    }
+                }
+                return hasAny ? updated : {}
+            })
+        }, 1000)
+        return () => clearInterval(timer)
     }, [])
 
     async function loadPolls() {
@@ -56,7 +75,41 @@ function PollsPage() {
         try {
             await api.inviteUser(invitePollId, inviteUsername)
             setInviteSuccess(`${inviteUsername} invited successfully`)
+            setLastInvitedUsername(inviteUsername)
+            const key = `${invitePollId}-${inviteUsername}`
+            setRecentInvites(prev => ({ ...prev, [key]: 10 }))
             setInviteUsername('')
+        } catch (err) {
+            setInviteError(err.message)
+        }
+    }
+
+    /*async function handleUninvite(pollId, username) {
+        try {
+            await api.uninvite(pollId, username)
+            const key = `${pollId}-${username}`
+            setRecentInvites(prev => {
+                const updated = { ...prev }
+                delete updated[key]
+                return updated
+            })
+            setInviteSuccess(null)
+        } catch (err) {
+            setInviteError(err.message)
+        }
+    }*/
+
+    async function handleUninvite(pollId, username) {
+        console.log('uninvite called with:', pollId, username)
+        try {
+            await api.uninvite(pollId, username)
+            const key = `${pollId}-${username}`
+            setRecentInvites(prev => {
+                const updated = { ...prev }
+                delete updated[key]
+                return updated
+            })
+            setInviteSuccess(null)
         } catch (err) {
             setInviteError(err.message)
         }
@@ -99,26 +152,33 @@ function PollsPage() {
                                     <p className="card-text text-muted">{poll.description}</p>
                                     <small className="text-muted">
                                         Due: {new Date(poll.dueDate).toLocaleDateString('de-DE')}                                        {poll.questions.length} questions &nbsp;|&nbsp;
-                                        <span className={poll.finished
-                                            ? 'text-danger' : 'text-success'}>
-                      {poll.finished ? 'Finished' : 'Active'}
-                    </span>
+                                        <span className={
+                                            poll.finished ? 'text-danger' :
+                                                new Date(poll.dueDate) < new Date() ? 'text-warning' :
+                                                    'text-success'
+                                        }>
+                                          {poll.finished ? 'Finished' :
+                                              new Date(poll.dueDate) < new Date() ? 'Expired' :
+                                                  'Active'}
+                                        </span>
                                     </small>
                                 </div>
                                 <div className="d-flex gap-2 flex-wrap justify-content-end">
                                     {!poll.finished && (
                                         <>
-                                            <button
-                                                className="btn btn-sm btn-outline-primary"
-                                                onClick={() => {
-                                                    setInvitePollId(poll.id)
-                                                    setInviteError(null)
-                                                    setInviteSuccess(null)
-                                                    setInviteUsername('')
-                                                }}
-                                            >
-                                                Invite
-                                            </button>
+                                            {new Date(poll.dueDate) >= new Date() && (
+                                                <button
+                                                    className="btn btn-sm btn-outline-purple"
+                                                    onClick={() => {
+                                                        setInvitePollId(poll.id)
+                                                        setInviteError(null)
+                                                        setInviteSuccess(null)
+                                                        setInviteUsername('')
+                                                    }}
+                                                >
+                                                    Invite
+                                                </button>
+                                            )}
                                             <button
                                                 className="btn btn-sm btn-warning"
                                                 onClick={() => handleFinish(poll.id)}
@@ -157,13 +217,15 @@ function PollsPage() {
                                         />
                                         <button
                                             type="submit"
-                                            className="btn btn-sm btn-primary"
+                                            className="btn btn-sm btn-purple"
+                                            style={{ flexShrink: 0 }}
                                         >
                                             Send
                                         </button>
                                         <button
                                             type="button"
                                             className="btn btn-sm btn-secondary"
+                                            style={{ flexShrink: 0 }}
                                             onClick={() => setInvitePollId(null)}
                                         >
                                             Cancel
@@ -175,8 +237,19 @@ function PollsPage() {
                                         </div>
                                     )}
                                     {inviteSuccess && (
-                                        <div className="alert alert-success mt-2 py-1">
-                                            {inviteSuccess}
+                                        <div className="d-flex align-items-center gap-2 mt-2">
+                                            <div className="alert alert-success py-1 mb-0 flex-grow-1">
+                                                {inviteSuccess}
+                                            </div>
+                                            {recentInvites[`${invitePollId}-${lastInvitedUsername}`] > 0 && (
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-sm btn-outline-danger"
+                                                    onClick={() => handleUninvite(invitePollId, lastInvitedUsername)}
+                                                >
+                                                    Undo ({recentInvites[`${invitePollId}-${lastInvitedUsername}`]}s)
+                                                </button>
+                                            )}
                                         </div>
                                     )}
                                 </div>

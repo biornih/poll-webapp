@@ -57,4 +57,12 @@ public class InvitationController {
         return invitationService.getAggregateResults(
                 pollId, currentUsername());
     }
+
+    @SecurityRequirement(name = "basicAuth")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/polls/{pollId}/invite/{username}")
+    public void uninvite(@PathVariable long pollId,
+                         @PathVariable String username) {
+        invitationService.uninvite(pollId, username, currentUsername());
+    }
 }

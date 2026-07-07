@@ -75,4 +75,13 @@ export const api = {
     },
 
     isLoggedIn: () => !!localStorage.getItem('username'),
+    getStats: () => request('GET', '/users/stats'),
+
+    updateUsername: (username) =>
+        request('PUT', '/users/username', { username }),
+    updatePassword: (currentPassword, newPassword) =>
+        request('PUT', '/users/password', { currentPassword, newPassword }),
+
+    uninvite: (pollId, username) =>
+        request('DELETE', `/polls/${pollId}/invite/${username}`),
 }

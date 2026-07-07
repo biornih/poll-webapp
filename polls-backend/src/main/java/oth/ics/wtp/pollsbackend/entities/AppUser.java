@@ -42,6 +42,11 @@ public class AppUser {
         this.hashedPassword = hashedPassword;
     }
 
+    private java.time.LocalDate passwordChangedAt;
+
+    public java.time.LocalDate getPasswordChangedAt() { return passwordChangedAt; }
+    public void setPasswordChangedAt(java.time.LocalDate date) { this.passwordChangedAt = date; }
+
     //localhost:8080/swagger-ui/index.html
     //http://localhost:7070/?server=db
     /*

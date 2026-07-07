@@ -13,4 +13,5 @@ public interface InvitationRepository extends CrudRepository<Invitation, Long> {
     Optional<Invitation> findByPollIdAndInviteeUsername(long pollId, String username);
     boolean existsByPollIdAndInviteeUsername(long pollId, String username);
     int countByPollId(long pollId);
+    void deleteByPollIdAndInviteeUsername(long pollId, String username);
 }

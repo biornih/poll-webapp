@@ -70,6 +70,7 @@ public class InvitationService {
                 .stream()
                 .filter(inv -> !inv.isHasAnswered())
                 .filter(inv -> !inv.getPoll().isFinished())
+                .filter(inv -> !inv.getPoll().getDueDate().isBefore(java.time.LocalDate.now()))
                 .map(this::toDto)
                 .toList();
     }
@@ -82,6 +83,10 @@ public class InvitationService {
         if (poll.isFinished()) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Poll is already finished");
+        }
+        if (poll.getDueDate().isBefore(java.time.LocalDate.now())) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Poll has expired");
         }
 
         Invitation invitation = invitationRepository
@@ -258,5 +263,21 @@ public class InvitationService {
                     };
                 })
                 .toList();
+    }
+
+    @Transactional
+    public void uninvite(long pollId, String username, String currentUsername) {
+        Poll poll = findPollOrThrow(pollId);
+        requireOwner(poll, currentUsername);
+        if (poll.isFinished()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Poll is already finished");
+        }
+        if (!invitationRepository.existsByPollIdAndInviteeUsername(
+                pollId, username)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Invitation not found");
+        }
+        invitationRepository.deleteByPollIdAndInviteeUsername(pollId, username);
     }
 }
