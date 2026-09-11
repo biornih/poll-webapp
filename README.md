@@ -1,4 +1,11 @@
-# ics-wtp-polls
+# Polls Web App
+
+<p align="center">
+  <img src="PollsExample1.PNG" width="200" alt="Log in">
+  <img src="PollsExample2.PNG" width="200" alt="Polls">
+  <img src="PollsExample3.PNG" width="200" alt="Create">
+  <img src="PollsExample4.PNG" width="200" alt="Profile">
+</p>
 
 **Poll Management Application** — Web Technology Project (International Computer Science), OTH Regensburg, Summer Semester 2026.
 
@@ -71,13 +78,3 @@ cd polls-frontend
 npm run dev
 # Frontend available at http://localhost:5173
 ```
-
-## AI usage
-
-This project was developed with **Claude (Anthropic)** as a learning assistant. Claude was used to:
-- Explain Spring Boot concepts (dependency injection, JPA, Spring Security)
-- Guide the step-by-step implementation of each layer
-- Debug errors during development
-- Explain React concepts and hooks
-
-All conversations were used for learning and understanding. Every line of code was typed manually and can be explained. AI-generated code does not exceed 25% of the total codebase.
