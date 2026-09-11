@@ -1,10 +1,10 @@
 # Polls Web App
 
 <p align="center">
-  <img src="PollsExample1.PNG" width="200" alt="Log in">
-  <img src="PollsExample2.PNG" width="200" alt="Polls">
-  <img src="PollsExample3.PNG" width="200" alt="Create">
-  <img src="PollsExample4.PNG" width="200" alt="Profile">
+  <img src="PollsExample1.png" width="400" alt="Log in">
+  <img src="PollsExample2.png" width="400" alt="Polls">
+  <img src="PollsExample3.png" width="400" alt="Create">
+  <img src="PollsExample4.png" width="400" alt="Profile">
 </p>
 
 **Poll Management Application** — Web Technology Project (International Computer Science), OTH Regensburg, Summer Semester 2026.
